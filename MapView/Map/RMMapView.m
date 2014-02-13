@@ -2638,6 +2638,7 @@
     else if ( ! showLogoBug && _logoBug)
     {
         [_logoBug removeFromSuperview];
+        _logoBug = nil;
     }
 
     _showLogoBug = showLogoBug;
