@@ -69,6 +69,8 @@
 #define kRMTrackingHaloAnnotationTypeName   @"RMTrackingHaloAnnotation"
 #define kRMAccuracyCircleAnnotationTypeName @"RMAccuracyCircleAnnotation"
 
+#define ZOOMING_MARGIN  35.
+
 #pragma mark --- end constants ----
 
 @interface RMMapView (PrivateMethods) <UIScrollViewDelegate,
@@ -1050,6 +1052,11 @@
                                  ((planetBounds.size.height - normalizedProjectedPoint.y - boundsRect.size.height) / _metersPerPixel) / zoomScale,
                                  (boundsRect.size.width / _metersPerPixel) / zoomScale,
                                  (boundsRect.size.height / _metersPerPixel) / zoomScale);
+    CGFloat margin = zoomRect.size.width * ZOOMING_MARGIN / _mapScrollView.frame.size.width;
+    zoomRect.origin.x -= margin;
+    zoomRect.origin.y -= margin;
+    zoomRect.size.width += margin*2;
+    zoomRect.size.height += margin*2;
     [_mapScrollView zoomToRect:zoomRect animated:animated];
 }
 
